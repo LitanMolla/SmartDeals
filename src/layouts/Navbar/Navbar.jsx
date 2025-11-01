@@ -11,7 +11,7 @@ const Navbar = () => {
     </>
     return (
         <>
-            <div className="bg-gray-100 py-2.5">
+            <div className="bg-gray-100 py-2.5 shadow sticky top-0 left-0 w-full">
                 <nav className="container flex justify-between items-center gap-5">
                     <Link className='text-xl md:text-2xl font-bold block'>Smart<span className='bg-linear-to-tr from-purple-700 to-purple-400 bg-clip-text text-transparent'>Deals</span></Link>
                     <ul className='lg:flex gap-5 hidden flex-wrap'>{navMenu}</ul>

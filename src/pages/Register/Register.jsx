@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import google from '../../assets/google.svg'
+import { AuthContex } from '../../contex/ContexProvider'
 const Register = () => {
+  const {createUser,loading,setLoading} = useContext(AuthContex)
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const photo = event.target.photo.value;
+    const password = event.target.password.value;
+    // console.log({name,email,photo,password});
+    createUser(email,password)
+    .then(result=>{
+      console.log(result.user);
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
   return (
     <>
       <div className="my-10 lg:my-20">
         <div className="container">
-          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300">
-            <form className='space-y-3 w-full'>
+          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300">
+            <form onSubmit={handleRegister} className='space-y-3 w-full'>
               <h4 className='text-center text-2xl lg:text-3xl font-bold'>Register</h4>
               <p className='text-center mb-5'>Already have an account? <Link to='/login' className='bg-gr text-transparent bg-clip-text'>Login</Link></p>
               <div className="">

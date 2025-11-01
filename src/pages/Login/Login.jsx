@@ -6,7 +6,7 @@ const Login = () => {
     <>
       <div className="my-10 lg:my-20">
         <div className="container">
-          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300">
+          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300">
             <form className='space-y-3 w-full'>
               <h4 className='text-center text-2xl lg:text-3xl font-bold'>Login</h4>
               <p className='text-center mb-5'>Don't have an account? <Link to='/register' className='bg-gr text-transparent bg-clip-text'>Register</Link></p>
