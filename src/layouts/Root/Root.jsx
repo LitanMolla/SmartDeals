@@ -6,13 +6,13 @@ import Footer from '../Footer/Footer'
 const Root = () => {
   return (
     <>
-        <div className="flex flex-col min-h-screen font-inter text-slate-900">
-            <Navbar/>
-            <main className='flex-1'>
-                <Outlet/>
-            </main>
-            <Footer/>
-        </div>
+      <div className="flex flex-col min-h-screen font-inter text-slate-900 bg-gray-100">
+        <Navbar />
+        <main className='flex-1'>
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }
