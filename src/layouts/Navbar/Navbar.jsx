@@ -16,7 +16,8 @@ const Navbar = () => {
                     <Link className='text-xl md:text-2xl font-bold block'>Smart<span className='bg-linear-to-tr from-purple-700 to-purple-400 bg-clip-text text-transparent'>Deals</span></Link>
                     <ul className='lg:flex gap-5 hidden flex-wrap'>{navMenu}</ul>
                     <div className="">
-                        <NavLink to='/login' className='text-purple-600 border border-purple-600 font-medium px-6 py-2.5 rounded-md block'>Login</NavLink>
+                        <NavLink to='/login' className='text-purple-600 border border-purple-600 font-medium px-6 py-2.5 rounded-md block duration-300 hover:bg-purple-500 hover:text-gray-100'>Login</NavLink>
+
                     </div>
                 </nav>
             </div>

@@ -9,3 +9,7 @@
   margin-inline: auto;
   padding-inline: 2rem;
 }
+
+.bg-gr {
+  @apply bg-linear-to-tr from-purple-700 to-purple-400
+}
