@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import google from '../../assets/google.svg'
 import { AuthContex } from '../../contex/ContexProvider'
+import Swal from 'sweetalert2'
 const Register = () => {
-  const {createUser,loading,setLoading} = useContext(AuthContex)
+  const { createUser, loading, setLoading, loginWithGoogle, updateUser } = useContext(AuthContex)
   const handleRegister = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -11,19 +12,45 @@ const Register = () => {
     const photo = event.target.photo.value;
     const password = event.target.password.value;
     // console.log({name,email,photo,password});
-    createUser(email,password)
-    .then(result=>{
-      console.log(result.user);
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+    createUser(email, password)
+      .then(result => {
+        // console.log(result.user);
+        Swal.fire({
+          title: "Register successfully",
+          icon: "success",
+        });
+        updateUser({ displayName: name, photoURL: photo })
+      })
+      .catch(error => {
+        // console.log(error);
+        Swal.fire({
+          title: `${error.code}`,
+          icon: "error",
+        });
+      })
+  }
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then(result => {
+        Swal.fire({
+          title: "Login Successfully",
+          icon: "success"
+        });
+        console.log(result.user);
+      })
+      .catch(error => {
+        // console.log(error);
+        Swal.fire({
+          title: `${error.code}`,
+          icon: "error",
+        });
+      })
   }
   return (
     <>
       <div className="my-10 lg:my-20">
         <div className="container">
-          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300">
+          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300 bg-white">
             <form onSubmit={handleRegister} className='space-y-3 w-full'>
               <h4 className='text-center text-2xl lg:text-3xl font-bold'>Register</h4>
               <p className='text-center mb-5'>Already have an account? <Link to='/login' className='bg-gr text-transparent bg-clip-text'>Login</Link></p>
@@ -51,7 +78,7 @@ const Register = () => {
               <p className='font-medium'>OR</p>
               <hr className='border-gray-300 flex-1' />
             </div>
-            <button className='flex items-center justify-center border w-full border-gray-300 rounded-md py-2.5 cursor-pointer duration-300 hover:bg-gray-100 gap-2'><img className='w-5' src={google} alt="google.svg" /><span>Login In With Google</span></button>
+            <button onClick={handleGoogleLogin} className='flex items-center justify-center border w-full border-gray-300 rounded-md py-2.5 cursor-pointer duration-300 hover:bg-gray-100 gap-2'><img className='w-5' src={google} alt="google.svg" /><span>Login In With Google</span></button>
           </div>
         </div>
       </div>

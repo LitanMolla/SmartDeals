@@ -5,9 +5,9 @@ import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router'
 const Hero = () => {
     return (
-        <div className='bg-linear-to-br from-pink-200 to-teal-100 relative overflow-hidden'>
-            <img className='absolute left-0 z-10' src={heroLeft} alt="heroLeft" />
-            <img className='absolute right-0 z-10' src={heroRight} alt="heroRight" />
+        <div className='bg-linear-to-br from-pink-200 to-teal-100  overflow-hidden relative'>
+            <img className='absolute left-0' src={heroLeft} alt="heroLeft" />
+            <img className='absolute right-0 ' src={heroRight} alt="heroRight" />
             <div className="container py-15 lg:py-20">
                 <h1 className='text-3xl md:text-5xl font-bold text-center leading-14'>Deal your <span className='bg-gr bg-clip-text text-transparent'>Products</span> <br className='hidden lg:block' /> in a <span className='bg-gr bg-clip-text text-transparent'>Smart</span> way !</h1>
                 <p className='text-center text-gray-500 mt-3'>SmartDeals helps you sell, resell, and shop from trusted local sellers — all in one place!</p>

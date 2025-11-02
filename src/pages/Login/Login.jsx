@@ -1,13 +1,39 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import google from '../../assets/google.svg'
+import { AuthContex } from '../../contex/ContexProvider'
+import Swal from 'sweetalert2'
 const Login = () => {
+  const { loading, setLoading, loginWithGoogle , loginUser} = useContext(AuthContex);
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then(result => {
+        Swal.fire({
+          title: "Login Successfully",
+          icon: "success"
+        });
+        console.log(result.user);
+      })
+      .catch(error => {
+        // console.log(error);
+        Swal.fire({
+          title: `${error.code}`,
+          icon: "error",
+        });
+      })
+  }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const password = event.target.password.value;
+    const email = event.target.email.value;
+    loginUser(email,password)
+  }
   return (
     <>
       <div className="my-10 lg:my-20">
         <div className="container">
-          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300">
-            <form className='space-y-3 w-full'>
+          <div className="max-w-md w-full mx-auto p-10 rounded-md shadow shadow-gray-300 hover:shadow-xl duration-300 bg-white">
+            <form onSubmit={handleLogin} className='space-y-3 w-full'>
               <h4 className='text-center text-2xl lg:text-3xl font-bold'>Login</h4>
               <p className='text-center mb-5'>Don't have an account? <Link to='/register' className='bg-gr text-transparent bg-clip-text'>Register</Link></p>
               <div className="">
@@ -26,7 +52,7 @@ const Login = () => {
               <p className='font-medium'>OR</p>
               <hr className='border-gray-300 flex-1' />
             </div>
-            <button className='flex items-center justify-center border w-full border-gray-300 rounded-md py-2.5 cursor-pointer duration-300 hover:bg-gray-100 gap-2'><img className='w-5' src={google} alt="google.svg" /><span>Login In With Google</span></button>
+            <button onClick={handleGoogleLogin} className='flex items-center justify-center border w-full border-gray-300 rounded-md py-2.5 cursor-pointer duration-300 hover:bg-gray-100 gap-2'><img className='w-5' src={google} alt="google.svg" /><span>Login In With Google</span></button>
           </div>
         </div>
       </div>
