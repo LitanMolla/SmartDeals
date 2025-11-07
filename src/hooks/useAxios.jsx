@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const useAxios = () => {
     const instance = axios.create({
-        baseURL: 'http://localhost:3000/'
+        baseURL: 'https://smart-server-ruddy.vercel.app/'
     });
     return instance
 }

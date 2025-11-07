@@ -32,18 +32,18 @@ const ProductDetails = () => {
   const handleBidSubmit = (event) => {
     event.preventDefault()
     // console.log(bidsData);
-    fetch('http://localhost:3000/bids',{
+    fetch('https://smart-server-ruddy.vercel.app/bids', {
       method: 'POST',
-      headers: {'content-type':'application/json'},
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(bidsData)
     })
-    .then(res=>res.json())
-    .then(data=>{
-      if (data.insertedId) {
-        Swal.fire({title: 'Bid submited succesfully',icon:'success'})
-        setOpenModal(false)
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          Swal.fire({ title: 'Bid submited succesfully', icon: 'success' })
+          setOpenModal(false)
+        }
+      })
   }
   return (
     <div>
@@ -87,7 +87,7 @@ const ProductDetails = () => {
               <p><b>Contact:</b> {seller_contact}</p>
               <p><b>Status:</b> <span className='bg-yellow-100 text-yellow-600 capitalize px-3 py-1 border border-yellow-200 rounded-full'>{status}</span></p>
             </div>
-            <button onClick={()=>setOpenModal(open=>!open)} className='w-full block text-gray-100 font-medium bg-linear-to-r from-purple-600 to-pink-400 py-2.5 rounded-md cursor-pointer hover:bg-linear-to-l duration-300'>I want Buy This Product</button>
+            <button onClick={() => setOpenModal(open => !open)} className='w-full block text-gray-100 font-medium bg-linear-to-r from-purple-600 to-pink-400 py-2.5 rounded-md cursor-pointer hover:bg-linear-to-l duration-300'>I want Buy This Product</button>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ const ProductDetails = () => {
                 <input required onChange={(e) => setBuyer_contact(e.target.value)} className='block mt-1 border border-gray-200 rounded-md px-3 py-2 w-full' type="text" placeholder='Your phone' />
               </div>
               <div className="flex justify-between items-center gap-5">
-                <button onClick={()=>setOpenModal(open=>!open)} type='button' className='text-purple-500 w-full flex-1 py-2.5 rounded-md border border-purple-500 cursor-pointer duration-300 hover:bg-purple-200'>Cancel</button>
+                <button onClick={() => setOpenModal(open => !open)} type='button' className='text-purple-500 w-full flex-1 py-2.5 rounded-md border border-purple-500 cursor-pointer duration-300 hover:bg-purple-200'>Cancel</button>
                 <button className='flex-1 w-full py-2.5 border border-purple-500 bg-linear-to-r from-purple-600 to-indigo-400 text-gray-100 cursor-pointer rounded-md duration-300 hover:bg-linear-to-l'>Submit Bid</button>
               </div>
             </form>

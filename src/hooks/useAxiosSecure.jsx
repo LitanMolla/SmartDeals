@@ -3,10 +3,10 @@ import useAuth from "./useAuth"
 import { useEffect } from "react";
 
 const useAxiosSecure = () => {
-    const { user , logOutUser} = useAuth()
+    const { user, logOutUser } = useAuth()
     const token = user?.accessToken;
     const instance = axios.create({
-        baseURL: 'http://localhost:3000/'
+        baseURL: 'https://smart-server-ruddy.vercel.app/'
     });
     useEffect(() => {
         instance.interceptors.request.use((config) => {

@@ -17,14 +17,14 @@ const Router = createBrowserRouter([
         errorElement: <NotFound />,
         Component: Root,
         children: [
-            { index: true, Component: Home, loader: () => fetch('http://localhost:3000/latest') },
+            { index: true, Component: Home, loader: () => fetch('https://smart-server-ruddy.vercel.app/latest') },
             { path: 'login', Component: Login },
             { path: 'register', Component: Register },
             { path: 'all-products', Component: AllProducts },
             { path: 'add-products', Component: AddProducts },
             { path: 'my-products', Component: MyProducts },
             { path: 'my-bids', Component: MyBids },
-            { path: 'product-details/:id', Component: ProductDetails, loader: ({ params }) => fetch(`http://localhost:3000/products/${params.id}`) }
+            { path: 'product-details/:id', Component: ProductDetails, loader: ({ params }) => fetch(`https://smart-server-ruddy.vercel.app/products/${params.id}`) }
         ]
     }
 ])

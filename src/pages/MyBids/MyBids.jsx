@@ -9,7 +9,7 @@ const MyBids = () => {
   // console.log(user);
   // console.log(bids);
   useEffect(() => {
-    fetch(`http://localhost:3000/bids?email=${userEmail}`, {
+    fetch(`https://smart-server-ruddy.vercel.app/bids?email=${userEmail}`, {
       headers: { authorization: `Bearer ${user?.accessToken}` }
     })
       .then(res => res.json())
@@ -19,7 +19,7 @@ const MyBids = () => {
       })
   }, [userEmail])
   const handleRemove = (id) => {
-    fetch(`http://localhost:3000/bids/${id}`, {
+    fetch(`https://smart-server-ruddy.vercel.app/bids/${id}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
