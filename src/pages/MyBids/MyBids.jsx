@@ -6,10 +6,17 @@ const MyBids = () => {
   const { user } = useContext(AuthContex)
   const userEmail = user?.email;
   const [bids, setBids] = useState([]);
+  // console.log(user);
+  // console.log(bids);
   useEffect(() => {
-    fetch(`http://localhost:3000/bids?email=${userEmail}`)
+    fetch(`http://localhost:3000/bids?email=${userEmail}`, {
+      headers: { authorization: `Bearer ${user?.accessToken}` }
+    })
       .then(res => res.json())
-      .then(data => setBids(data))
+      .then(data => (Array.isArray(data)) && setBids(data))
+      .catch(error => {
+        console.log(error.code);
+      })
   }, [userEmail])
   const handleRemove = (id) => {
     fetch(`http://localhost:3000/bids/${id}`, {
@@ -32,7 +39,7 @@ const MyBids = () => {
     <>
       <div className="my-20">
         <div className="container">
-          <h2 className='font-bold text-center text-3xl lg:text-3xl mb-10'>My Bids: <span className='bg-gr bg-clip-text text-transparent'>{bids.length}</span></h2>
+          <h2 className='font-bold text-center text-3xl lg:text-3xl mb-10'>My Bids: <span className='bg-gr bg-clip-text text-transparent'>{bids?.length}</span></h2>
 
           <div className="w-full">
             {/* Desktop Table View */}
@@ -49,44 +56,47 @@ const MyBids = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {bids.map((bid, ind) => (
-                    <tr key={bid._id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 text-sm text-gray-900">{ind + 1}</td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-gray-300 rounded overflow-hidden">
-                            <img className='w-full h-full object-cover' src={bid?.image} alt="" />
+                  {
+                    bids &&
+                    bids?.map((bid, ind) => (
+                      <tr key={bid._id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 text-sm text-gray-900">{ind + 1}</td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-gray-300 rounded overflow-hidden">
+                              <img className='w-full h-full object-cover' src={bid?.image} alt="" />
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{bid.title}</div>
+                              <div className="text-sm text-gray-500">${bid.price_max}</div>
+                            </div>
                           </div>
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">{bid.title}</div>
-                            <div className="text-sm text-gray-500">${bid.price_max}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                              <img src={'https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png' || bid.seller_image} alt={bid.seller_name} />
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{bid.seller_name}</div>
+                              <div className="text-sm text-gray-500">{bid?.email}</div>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
-                            <img src={'https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png' || bid.seller_image} alt={bid.seller_name} />
-                          </div>
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">{bid.seller_name}</div>
-                            <div className="text-sm text-gray-500">{bid?.email}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">${bid.bid_price}</td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-gray-900">
-                          {bid.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <button onClick={() => handleRemove(bid._id)} className="px-4 py-2 border border-orange-500 text-orange-500 rounded-md text-sm font-medium hover:bg-orange-50 transition-colors cursor-pointer">
-                          Remove Bid
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">${bid.bid_price}</td>
+                        <td className="px-6 py-4">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-gray-900">
+                            {bid.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <button onClick={() => handleRemove(bid._id)} className="px-4 py-2 border border-orange-500 text-orange-500 rounded-md text-sm font-medium hover:bg-orange-50 transition-colors cursor-pointer">
+                            Remove Bid
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
