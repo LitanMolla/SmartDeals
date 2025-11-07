@@ -10,7 +10,7 @@ const useAxiosSecure = () => {
     });
     useEffect(() => {
         instance.interceptors.request.use((config) => {
-            config.headers.authorization = `Bearer  ${token}`
+            config.headers.authorization = `Bearer ${token}`
             return config;
         })
         instance.interceptors.response.use(res => {

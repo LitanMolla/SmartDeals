@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-
+import useAxiosSecure from '../../hooks/useAxiosSecure'
 const AddProducts = () => {
-  const { user } = useAuth();
+  const { user,loading } = useAuth();
   // console.log(user);
   const newProduct = {
     created_at: new Date(),
@@ -20,9 +19,12 @@ const AddProducts = () => {
     setFormData({ ...formData, [name]: value })
     // console.log({name,value});
   }
+  if (loading) {
+    return <p>Loading.....</p>
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    instance.post('https://smart-deals-opal.vercel.app/products',formData)
+    instance.post('https://smart-server-ruddy.vercel.app/products',formData)
     .then(data=>{
       if (data.data.insertedId) {
         Swal.fire({
@@ -31,7 +33,7 @@ const AddProducts = () => {
         })
       }
     })
-    .catch(error=>console.log(error.code))
+    .catch(error=>console.log(error))
   }
   return (
     <div className="my-10">
