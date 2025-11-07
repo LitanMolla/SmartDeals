@@ -6,7 +6,8 @@ const useAxiosSecure = () => {
     const { user, logOutUser } = useAuth()
     const token = user?.accessToken;
     const instance = axios.create({
-        baseURL: 'https://smart-server-ruddy.vercel.app/'
+        baseURL: 'https://smart-server-ruddy.vercel.app'
+        // baseURL: 'http://localhost:3000'
     });
     useEffect(() => {
         instance.interceptors.request.use((config) => {

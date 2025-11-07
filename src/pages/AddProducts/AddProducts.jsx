@@ -25,6 +25,7 @@ const AddProducts = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     instance.post('https://smart-server-ruddy.vercel.app/products',formData)
+    // instance.post('http://localhost:3000/products',formData)
     .then(data=>{
       if (data.data.insertedId) {
         Swal.fire({
