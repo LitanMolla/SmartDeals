@@ -20,7 +20,7 @@ const Router = createBrowserRouter([
             { index: true, Component: Home, loader: () => fetch('https://smart-server-ruddy.vercel.app/latest') },
             { path: 'login', Component: Login },
             { path: 'register', Component: Register },
-            { path: 'all-products', Component: AllProducts },
+            { path: 'all-products', Component: AllProducts, loader: () => fetch('https://smart-server-ruddy.vercel.app/products') },
             { path: 'add-products', Component: AddProducts },
             { path: 'my-products', Component: MyProducts },
             { path: 'my-bids', Component: MyBids },

@@ -22,7 +22,7 @@ const AddProducts = () => {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    instance.post('/products',formData)
+    instance.post('https://smart-deals-opal.vercel.app/products',formData)
     .then(data=>{
       if (data.data.insertedId) {
         Swal.fire({
